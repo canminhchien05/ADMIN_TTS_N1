@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
-import { useCountStore } from './stores/common.store';
+// import { useCountStore } from './stores/common.store';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import './App.css'
 
 function App() {
-  const { count: countFromStore } = useCountStore();
+  // const { count: countFromStore } = useCountStore();
 
 
   useEffect(() => {
@@ -14,7 +14,8 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}
+      />
     </>
   )
 }
