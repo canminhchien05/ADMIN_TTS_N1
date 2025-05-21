@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+#ADMIN_Tts_N1
+=======
+>>>>>>> 6e6be03 (ListCreateBrand)
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -52,3 +58,7 @@ export default tseslint.config({
   },
 })
 ```
+<<<<<<< HEAD
+=======
+>>>>>>> d4e09be (ListCreateDeleteProduct)
+>>>>>>> 6e6be03 (ListCreateBrand)

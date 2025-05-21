@@ -1,11 +1,13 @@
 import { createBrowserRouter, Navigate, Outlet, type RouteObject } from "react-router-dom";
 import Authenticated from "../components/layouts/authenticate";
 import MainLayout from "../components/layouts/MainLayout";
-import Category from "../pages/category";
 import DashboardPage from "../pages/dashBoard";
 import CreateProduct from "../pages/Products/createProduct";
 import ProductList from "../pages/Products/listProduct";
 import UpdateProduct from "../pages/Products/updateProduct";
+import ListBrand from "../pages/Brands/listBrand";
+import CreateBrand from "../pages/Brands/createBrand";
+import Category from "../pages/category";
 
 const routes: RouteObject[] = [
   {
@@ -43,6 +45,19 @@ const routes: RouteObject[] = [
           },
         ],
       },
+      {
+        path:"brands",
+        children:[
+          {
+            index:true,
+            element:<ListBrand/>
+          },
+          {
+            path: "create",
+            element: <CreateBrand />,
+          }
+        ]
+      }
     ],
   },
   {
