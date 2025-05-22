@@ -6,7 +6,7 @@ import type { Category } from "../../types/Category/category.type";
 
 const { Option } = Select;
 
-const CreateCategory = ({ onCreated }: { onCreated: () => void }) => {
+const CreateCategory = () => {
   const [form] = Form.useForm();
   const [parentCategories, setParentCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,6 @@ const CreateCategory = ({ onCreated }: { onCreated: () => void }) => {
       await axios.post("http://localhost:3000/api/category", values);
       message.success("Tạo danh mục thành công");
       form.resetFields();
-      onCreated();
     } catch {
       message.error("Tạo danh mục thất bại");
     } finally {
