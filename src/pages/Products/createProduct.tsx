@@ -12,6 +12,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/es/upload/interface';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 // import dayjs from 'dayjs';
 
 const { RangePicker } = DatePicker;
@@ -20,6 +21,7 @@ const { Option } = Select;
 const CreateProduct = () => {
   const [form] = Form.useForm();
   const [images, setImages] = useState<UploadFile[]>([]);
+  const navigate = useNavigate();
 
   const handleSubmit = async (values: any) => {
     if (images.length === 0) {
@@ -41,6 +43,7 @@ const CreateProduct = () => {
       message.success('Tạo sản phẩm thành công');
       form.resetFields();
       setImages([]);
+      navigate('/admin/products');
     } catch (error) {
       console.error('Lỗi khi tạo sản phẩm:', error);
       message.error('Tạo sản phẩm thất bại');

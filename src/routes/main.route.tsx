@@ -7,7 +7,9 @@ import ProductList from "../pages/Products/listProduct";
 import UpdateProduct from "../pages/Products/updateProduct";
 import ListBrand from "../pages/Brands/listBrand";
 import CreateBrand from "../pages/Brands/createBrand";
-import Category from "../pages/category";
+import ListCategory from "../pages/Categories/listCategory";
+import CreateCategory from "../pages/Categories/createCategory";
+import UpdateCategory from "../pages/Categories/updateCategory";
 
 const routes: RouteObject[] = [
   {
@@ -26,7 +28,20 @@ const routes: RouteObject[] = [
       },
       {
         path: "categories",
-        element: <Category />,
+        children:[
+          {
+            index:true,
+            element:<ListCategory/>
+          },
+          {
+            path: "create",
+            element: <CreateCategory />,
+          },
+          {
+            path: "edit/:id",
+            element: <UpdateCategory />,
+          }
+        ]
       },
       {
         path: "products",
