@@ -1,96 +1,104 @@
-import React, { useState } from 'react'
-
-interface BlogPost {
-  id: number
-  title: string
-  content: string
-}
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { IBlog } from '../../types/blog.types';
 
 const BlogsPage = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([
-    { id: 1, title: 'Bài viết đầu tiên', content: 'Nội dung bài viết 1' },
-    { id: 2, title: 'Bài viết thứ hai', content: 'Nội dung bài viết 2' },
-  ])
+  const navigate = useNavigate();
 
-  const [newPost, setNewPost] = useState({ title: '', content: '' })
+  const [blogs, setBlogs] = useState<IBlog[]>([
+    {
+      _id: '1',
+      title: 'Bài viết đầu tiên',
+      slug: 'bai-viet-dau-tien',
+      coverImage: 'https://via.placeholder.com/150',
+      content: 'Đây là nội dung bài viết đầu tiên',
+      tags: ['react', 'typescript'],
+      authorId: 'user1',
+      published: true,
+      createdAt: new Date().toISOString(),
+    },
+    {
+      _id: '2',
+      title: 'Bài viết thứ hai',
+      slug: 'bai-viet-thu-hai',
+      coverImage: 'https://via.placeholder.com/150',
+      content: 'Đây là nội dung bài viết thứ hai',
+      tags: ['blog', 'frontend'],
+      authorId: 'user2',
+      published: false,
+      createdAt: new Date().toISOString(),
+    },
+  ]);
 
-  const handleAdd = () => {
-    const newId = posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1
-    setPosts([...posts, { id: newId, ...newPost }])
-    setNewPost({ title: '', content: '' })
-  }
+  const handleDelete = (id: string) => {
+    setBlogs(blogs.filter((blog) => blog._id !== id));
+  };
 
-  const handleDelete = (id: number) => {
-    setPosts(posts.filter(p => p.id !== id))
-  }
-
-  const handleEdit = (id: number, field: keyof BlogPost, value: string) => {
-    setPosts(posts.map(p => (p.id === id ? { ...p, [field]: value } : p)))
-  }
+  const goToAddPage = () => {
+    navigate('/admin/addblog');
+  };
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-semibold mb-4 text-black">Blog</h2>
-      <div className="border rounded-xl p-4 shadow bg-white">
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Tiêu đề"
-            className="border p-2 mr-2 mb-2 bg-white text-black"
-            value={newPost.title}
-            onChange={e => setNewPost({ ...newPost, title: e.target.value })}
-          />
-          <textarea
-            placeholder="Nội dung"
-            className="border p-2 w-full mb-2 bg-white text-black"
-            rows={3}
-            value={newPost.content}
-            onChange={e => setNewPost({ ...newPost, content: e.target.value })}
-          />
-          <button onClick={handleAdd} className="bg-blue-500 text-white px-4 py-2 rounded">Thêm</button>
-        </div>
+      <h2 className="text-2xl font-semibold mb-4 text-black">Danh sách bài viết</h2>
 
-        <table className="w-full table-auto border">
+      <button
+        onClick={goToAddPage}
+        className="bg-blue-600 text-white px-4 py-2 rounded mb-6"
+      >
+        + Thêm bài viết
+      </button>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border border-collapse">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border p-2 text-black">ID</th>
-              <th className="border p-2 text-black">Tiêu đề</th>
-              <th className="border p-2 text-black">Nội dung</th>
-              <th className="border p-2 text-black">Hành động</th>
+              <th className="border p-2 text-black text-left">Ảnh bìa</th>
+              <th className="border p-2 text-black text-left">Tiêu đề</th>
+              <th className="border p-2 text-black text-left">Slug</th>
+              <th className="border p-2 text-black text-center">Trạng thái</th>
+              <th className="border p-2 text-black text-center">Ngày tạo</th>
+              <th className="border p-2 text-black text-center">Hành động</th>
             </tr>
           </thead>
           <tbody>
-            {posts.map(post => (
-              <tr key={post.id}>
-                <td className="border p-2 text-center text-black">{post.id}</td>
+            {blogs.map((blog) => (
+              <tr key={blog._id}>
                 <td className="border p-2">
-                  <input
-                    type="text"
-                    readOnly
-                    value={post.title}
-                    className="w-full border px-2 bg-white text-black"
-                    onChange={e => handleEdit(post.id, 'title', e.target.value)}
-                  />
+                  <img src={blog.coverImage} alt="cover" className="w-16 h-16 object-cover rounded" />
                 </td>
-                <td className="border p-2">
-                  <textarea
-                    className="w-full border px-2 bg-white text-black"
-                    readOnly
-                    rows={2}
-                    value={post.content}
-                    onChange={e => handleEdit(post.id, 'content', e.target.value)}
-                  />
+                <td className="border p-2 text-black">{blog.title}</td>
+                <td className="border p-2 text-black">{blog.slug}</td>
+                <td className="border p-2 text-center">
+                  <span className={`px-2 py-1 rounded text-white ${blog.published ? 'bg-green-500' : 'bg-gray-400'}`}>
+                    {blog.published ? 'Công khai' : 'Ẩn'}
+                  </span>
+                </td>
+                <td className="border p-2 text-center text-black">
+                  {new Date(blog.createdAt).toLocaleDateString('vi-VN')}
                 </td>
                 <td className="border p-2 text-center">
-                  <button onClick={() => handleDelete(post.id)} className="text-white bg-red-500">Xóa</button>
+                  <button
+                    onClick={() => handleDelete(blog._id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded"
+                  >
+                    Xoá
+                  </button>
                 </td>
               </tr>
             ))}
+            {blogs.length === 0 && (
+              <tr>
+                <td colSpan={6} className="text-center p-4 text-gray-500">
+                  Không có bài viết nào
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BlogsPage
+export default BlogsPage;

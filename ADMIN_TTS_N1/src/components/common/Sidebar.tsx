@@ -1,4 +1,4 @@
-import { DashboardFilled, FileTextFilled, HighlightFilled, ProductFilled } from '@ant-design/icons';
+import { ContainerOutlined, DashboardFilled, FileTextFilled, HighlightFilled, ProductFilled } from '@ant-design/icons';
 import { Menu, type MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +50,7 @@ const Sidebar = () => {
     {
       key: 'blogs',
       label: 'Quản lý blog',
-      icon: <HighlightFilled />,
+      icon: <ContainerOutlined />,
       children: [
         { key: 'blogs', label: 'Danh sách blogs' },
         { key: 'blogadd', label: 'Thêm blogs' },
@@ -110,7 +110,7 @@ const Sidebar = () => {
           navigate("/admin/blogs")
           break;
           case "blogadd":
-          navigate("/admin/blog-add")
+          navigate("/admin/blogs/add")
           break;
           case "vouchers":
           navigate("/admin/vouchers")

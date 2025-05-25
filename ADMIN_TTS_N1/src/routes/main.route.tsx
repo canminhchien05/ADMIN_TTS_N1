@@ -7,6 +7,8 @@ import UsersPage from "../pages/Users/Users";
 import BlogsPage from "../pages/Blog/Blog";
 import VouchersPage from "../pages/Vouchers/Vouches";
 import VariantsPage from "../pages/Variants/Variants";
+import AddBlogPage from "../pages/Blog/BlogAdd";
+import UpdateBlogPage from "../pages/Blog/BlogUpdate";
 
 
 export const router = createBrowserRouter([
@@ -19,6 +21,8 @@ export const router = createBrowserRouter([
       {path: "brands", element: <BrandsPage/> },
       {path: "users", element: <UsersPage/> },
       {path: "blogs", element: <BlogsPage/> },
+      {path: "blogs/add", element: <AddBlogPage/> },
+      {path: "blogs/update/:id", element: <UpdateBlogPage/> },
       {path: "vouchers", element: <VouchersPage/> },
       {path: "variants", element: <VariantsPage/> },
     ]
