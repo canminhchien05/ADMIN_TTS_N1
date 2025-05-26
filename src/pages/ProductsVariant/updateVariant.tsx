@@ -72,7 +72,7 @@ const UpdateProductVariant = () => {
   }
 
   return (
-    <Card title="Cập nhật biến thể sản phẩm" style={{ maxWidth: 1000, margin: "auto" }}>
+    <Card title="Cập nhật biến thể sản phẩm" className="max-w-screen-xl" >
       <Form layout="vertical" form={form} onFinish={onFinish}>
         <Row gutter={16}>
           <Col xs={24} md={12}>

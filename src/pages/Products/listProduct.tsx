@@ -1,19 +1,18 @@
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import {
-  Table,
-  Image,
-  Tag,
-  Space,
   Button,
-  Popconfirm,
+  Image,
   message,
+  Popconfirm,
+  Space,
+  Table,
+  Tag,
   Tooltip,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import type { IProduct } from '../../types/product/product.type';
 import { useNavigate } from 'react-router-dom';
+import type { IProduct } from '../../types/product/product.type';
 import { axiosInstance } from '../../utils/axios.util';
 
 const statusColorMap: Record<string, string> = {

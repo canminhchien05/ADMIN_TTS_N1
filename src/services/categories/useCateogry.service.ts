@@ -29,15 +29,15 @@ export const useDeleteCategory = () => {
   return useMutation({
     mutationKey: ['hand_delete_category'],
     mutationFn: async (id: string) => {
-      const response = await axiosInstance.delete(`/categories/soft-delete/${id}`);
+      const response = await axiosInstance.delete(`/categories/${id}`);
       return response.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['get_categories'] });
-      message.success("Danh mục đã được cập nhật");
+      message.success("Danh mục đã được xóa");
     },
     onError: () => {
-      message.error("Lỗi khi cập nhật danh mục");
+      message.error("Lỗi khi xóa danh mục");
     }
   })
 }

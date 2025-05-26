@@ -1,31 +1,28 @@
-import { Outlet } from 'react-router-dom';
-import Header from '../common/Header';
-import Sidebar from '../common/Sidebar';
+import React from 'react'
+import Header from '../common/Header'
+import Footer from '../common/Footer'
+import Sidebar from '../common/Sidebar'
 
-const MainLayout = () => {
+type Props = {
+  children: React.ReactNode
+}
+
+const MainLayout = ({ children }: Props) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white shadow z-30">
-        <Header />
-      </header>
+    <div className='flex min-h-dvh w-[calc(100dvw-15px)] max-w-[100dvw] flex-col' >
+      <Header />
+      <div className='flex w-full' >
+        <Sidebar />
+        {/* <div className='flex-1 flex flex-col bg-red-500' >
 
-      {/* Body with Sidebar and Content */}
-      <div className="flex flex-1 pt-16">
-        {/* Sidebar fixed width */}
-        <aside className="w-[300px] bg-white shadow fixed top-16 bottom-0 left-0 z-20">
-          <Sidebar />
-        </aside>
-
-        {/* Content */}
-        <main className="flex-1 ml-[200px] overflow-auto p-2">
-          <div className="bg-white rounded-xl p-2 shadow">
-            <Outlet />
-          </div>
+        </div> */}
+        <main className='flex-1 py-2' >
+          {children}  
         </main>
       </div>
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout
