@@ -1,13 +1,12 @@
-import React from "react";
-import { Form, Input, Button, message, Card } from "antd";
-import axios from "axios";
+import { Button, Card, Form, Input, message } from "antd";
+import { axiosInstance } from "../../utils/axios.util";
 
 const CreateBrand = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values: { name: string; logoUrl?: string; description?: string }) => {
     try {
-      await axios.post("http://localhost:3000/api/brands", values);
+      await axiosInstance.post("/brands", values);
       message.success("Tạo thương hiệu thành công");
       form.resetFields();
     } catch {

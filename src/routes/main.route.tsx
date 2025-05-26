@@ -1,6 +1,5 @@
 import { createBrowserRouter, Navigate, Outlet, type RouteObject } from "react-router-dom";
 import Authenticated from "../components/layouts/authenticate";
-import MainLayout from "../components/layouts/MainLayout";
 import DashboardPage from "../pages/dashBoard";
 import CreateProduct from "../pages/Products/createProduct";
 import ProductList from "../pages/Products/listProduct";
@@ -10,6 +9,12 @@ import CreateBrand from "../pages/Brands/createBrand";
 import ListCategory from "../pages/Categories/listCategory";
 import CreateCategory from "../pages/Categories/createCategory";
 import UpdateCategory from "../pages/Categories/updateCategory";
+import MainLayout from "../components/layouts/MainLayout";
+import UpdateBrand from "../pages/Brands/updateBrand";
+import SearchPage from "../pages/Search/search";
+import ProductVariantList from "../pages/ProductsVariant/listVariant";
+import CreateProductVariant from "../pages/ProductsVariant/createVarinant";
+import UpdateProductVariant from "../pages/ProductsVariant/updateVariant";
 
 const routes: RouteObject[] = [
   {
@@ -70,6 +75,36 @@ const routes: RouteObject[] = [
           {
             path: "create",
             element: <CreateBrand />,
+          },
+          {
+            path: "edit/:id",
+            element: <UpdateBrand />,
+          }
+        ]
+      },
+      {
+        path: "search",
+        children:[
+          {
+            index: true,
+            element: <SearchPage />,
+          }
+        ]
+      },
+      {
+        path: "variants",
+        children: [
+          {
+            index: true,
+            element: <ProductVariantList/>
+          },
+          {
+            path: "create",
+            element: <CreateProductVariant />,
+          },
+          {
+            path: "edit/:id",
+            element: <UpdateProductVariant />,
           }
         ]
       }

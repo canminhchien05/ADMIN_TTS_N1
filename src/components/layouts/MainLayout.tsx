@@ -1,25 +1,31 @@
-import React from 'react'
-import Header from '../common/Header'
-import Footer from '../common/Footer'
-import Sidebar from './sibar'
+import { Outlet } from 'react-router-dom';
+import Header from '../common/Header';
+import Sidebar from '../common/Sidebar';
 
-type Props = {
-  children: React.ReactNode
-}
-
-const MainLayout = ({ children }: Props) => {
+const MainLayout = () => {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
-      <Header />
-      <div style={{ display: 'flex', flex: 1 }}>
-        <Sidebar />
-        <main style={{ flex: 1, padding: 24, marginLeft: 200 }}>
-          {children}
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 h-16 bg-white shadow z-30">
+        <Header />
+      </header>
+
+      {/* Body with Sidebar and Content */}
+      <div className="flex flex-1 pt-16">
+        {/* Sidebar fixed width */}
+        <aside className="w-[300px] bg-white shadow fixed top-16 bottom-0 left-0 z-20">
+          <Sidebar />
+        </aside>
+
+        {/* Content */}
+        <main className="flex-1 ml-[200px] overflow-auto p-2">
+          <div className="bg-white rounded-xl p-2 shadow">
+            <Outlet />
+          </div>
         </main>
       </div>
-      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;

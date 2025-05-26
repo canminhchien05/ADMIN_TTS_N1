@@ -1,68 +1,111 @@
-// pages/ListCategory.tsx
-import React, { useEffect, useState } from "react";
-import { Table, message, Tag } from "antd";
-import axios from "axios";
-import { axiosInstance } from "../../utils/axios.util";
+import { useMemo, useState } from "react";
+import { Table, Button, Popconfirm, Tag, Space, Switch } from "antd";
+import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../utils/date.util";
+import { useDeleteCategory, useDeleteForceCategory, useGetCategories, useRestoreCategory } from "../../services";
 
-const ListCategory = () => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+const CategoryList = () => {
+  const navigate = useNavigate();
+  const [showDeleted, setShowDeleted] = useState(false); // Toggle hiển thị
+  const { mutate: onDeleteCategory } = useDeleteCategory();
+  const { data: categories, isLoading } = useGetCategories();
+  // const { mutate } = useHandGetCategories();
+  const { mutate: onRestoreCategory } = useRestoreCategory();
+  const { mutate: onDeleteForece } = useDeleteForceCategory();
 
-  const fetchCategories = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosInstance.get("api/categories");
-      setCategories(res.data);
-    } catch {
-      message.error("Lỗi khi tải danh mục");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  // Lọc hiển thị nếu không muốn thấy isDeleted === true
+  const filteredData = useMemo(() => {
+    return showDeleted
+      ? categories
+      : categories?.filter((cat) => !cat.isDeleted)
+  }, [categories, showDeleted]);
 
   const columns = [
     {
       title: "Tên danh mục",
       dataIndex: "name",
-      key: "name",
+    },
+    {
+      title: "Danh mục cha",
+      dataIndex: ["parentId", "name"], // truy cập parentId.name
+      render: (text) => text || <em>Không có (Danh mục gốc)</em>, // nếu null hiện "Không có"
     },
     {
       title: "Mô tả",
       dataIndex: "description",
-      key: "description",
-    },
-    {
-      title: "Danh mục cha",
-      dataIndex: "parentId",
-      key: "parentId",
-      render: (parent: { name?: string; _id?: string } | null) =>
-        parent ? <Tag color="blue">{parent.name || "ID: " + parent._id}</Tag> : "—",
     },
     {
       title: "Trạng thái",
       dataIndex: "isDeleted",
-      key: "isDeleted",
-      render: (deleted: boolean) =>
-        deleted ? <Tag color="red">Đã xóa</Tag> : <Tag color="green">Hoạt động</Tag>,
+      render: (isDeleted) =>
+        isDeleted ? <Tag color="red">Đã xóa</Tag> : <Tag color="green">Hoạt động</Tag>,
+    },
+    {
+      title: "Ngày tạo",
+      dataIndex: "createdAt",
+      render: (text) => formatDate(text),
+    },
+    {
+      title: "Hành động",
+      render: (_, record) => {
+        return (
+          <Space>
+            <Button
+              type="default"
+              onClick={() => navigate(`/admin/categories/edit/${record._id}`)}
+              disabled={record.isDeleted}
+            >
+              Cập nhật
+            </Button>
+            {!record.isDeleted ? (
+              <Popconfirm
+                title="Bạn có chắc muốn chuyển vào thùng rác?"
+                onConfirm={() => onDeleteCategory(record._id)}
+              >
+                <Button danger>Chuyển vào thùng rác</Button>
+              </Popconfirm>
+            ) : (
+              <>
+                <Button type="primary" onClick={() => onRestoreCategory(record._id)}>
+                  Khôi phục
+                </Button>
+                <Popconfirm
+                  title="Bạn có chắc muốn xóa vĩnh viễn?"
+                  onConfirm={() => onDeleteForece(record._id)}
+                >
+                  <Button danger type="dashed">
+                    Xóa vĩnh viễn
+                  </Button>
+                </Popconfirm>
+              </>
+            )}
+          </Space>
+        );
+      },
     },
   ];
 
+
   return (
-    <div style={{ padding: 24 }}>
-      <h1 style={{ marginBottom: 16 }}>Danh sách danh mục</h1>
+    <>
+     <h2>Danh sách danh mục</h2>
+      <div style={{ marginBottom: 16 }}>
+        <Switch
+          checked={showDeleted}
+          onChange={() => setShowDeleted(!showDeleted)}
+        />
+        <span style={{ marginLeft: 8 }}>
+          {showDeleted ? "Hiển thị tất cả (bao gồm đã xóa)" : "Chỉ hiển thị hoạt động"}
+        </span>
+      </div>
       <Table
         rowKey="_id"
-        loading={loading}
-        dataSource={categories}
+        loading={isLoading}
         columns={columns}
-        bordered
+        dataSource={filteredData}
       />
-    </div>
+    </>
   );
 };
 
-export default ListCategory;
+export default CategoryList;

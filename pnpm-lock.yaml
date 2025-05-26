@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.77.0
+        version: 5.77.0(react@18.3.1)
       '@types/react':
         specifier: ^18.3.21
         version: 18.3.21
@@ -20,12 +23,21 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
+      lucide-react:
+        specifier: ^0.511.0
+        version: 0.511.0(react@18.3.1)
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.56.4
+        version: 7.56.4(react@18.3.1)
       react-router-dom:
         specifier: ^7.6.0
         version: 7.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -44,7 +56,7 @@ importers:
         version: 4.4.1(vite@6.3.5(@types/node@22.15.19)(jiti@1.21.7)(yaml@2.8.0))
       antd:
         specifier: ^5.24.3
-        version: 5.25.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 5.25.2(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.3)
@@ -609,6 +621,14 @@ packages:
     resolution: {integrity: sha512-h1J+Yzjo/X+0EAvR2kIXJDuTuyT7drc+t2ALY0nIcGPbTatNOf0VWdhEA2Z4AAjv6X1NJV7SYo5oCTYRJhSlVA==}
     cpu: [x64]
     os: [win32]
+
+  '@tanstack/query-core@5.77.0':
+    resolution: {integrity: sha512-PFeWjgMQjOsnxBwnW/TJoO0pCja2dzuMQoZ3Diho7dPz7FnTUwTrjNmdf08evrhSE5nvPIKeqV6R0fvQfmhGeg==}
+
+  '@tanstack/react-query@5.77.0':
+    resolution: {integrity: sha512-jX52ot8WxWzWnAknpRSEWj6PTR/7nkULOfoiaVPk6nKu0otwt30UMBC9PTg/m1x0uhz1g71/imwjViTm/oYHxA==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1210,6 +1230,11 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-react@0.511.0:
+    resolution: {integrity: sha512-VK5a2ydJ7xm8GvBeKLS9mu1pVK6ucef9780JVUjw6bAjJL/QXnd4Y0p7SPeOUMC27YhzNCZvm5d/QX0Tp3rc0w==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
@@ -1240,6 +1265,9 @@ packages:
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
+
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -1614,6 +1642,12 @@ packages:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
       react: ^18.3.1
+
+  react-hook-form@7.56.4:
+    resolution: {integrity: sha512-Rob7Ftz2vyZ/ZGsQZPaRdIefkgOSrQSPXfqBdvOPwJfoGnjwRJUs7EM7Kc1mcoDv3NOtqBzPGbcMB8CGn9CKgw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
@@ -2379,6 +2413,13 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.41.0':
     optional: true
 
+  '@tanstack/query-core@5.77.0': {}
+
+  '@tanstack/react-query@5.77.0(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.77.0
+      react: 18.3.1
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.27.2
@@ -2530,7 +2571,7 @@ snapshots:
 
   ansi-styles@6.2.1: {}
 
-  antd@5.25.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  antd@5.25.2(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@ant-design/colors': 7.2.0
       '@ant-design/cssinjs': 1.23.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2562,7 +2603,7 @@ snapshots:
       rc-motion: 2.9.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-notification: 5.6.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-pagination: 5.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      rc-picker: 4.11.3(dayjs@1.11.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      rc-picker: 4.11.3(dayjs@1.11.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-progress: 4.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-rate: 2.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rc-resize-observer: 1.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3069,6 +3110,10 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
+  lucide-react@0.511.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   math-intrinsics@1.1.0: {}
 
   merge2@1.4.1: {}
@@ -3093,6 +3138,8 @@ snapshots:
       brace-expansion: 2.0.1
 
   minipass@7.1.2: {}
+
+  moment@2.30.1: {}
 
   ms@2.1.3: {}
 
@@ -3355,7 +3402,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  rc-picker@4.11.3(dayjs@1.11.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  rc-picker@4.11.3(dayjs@1.11.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.27.1
       '@rc-component/trigger': 2.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3367,6 +3414,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
       dayjs: 1.11.13
+      moment: 2.30.1
 
   rc-progress@4.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -3529,6 +3577,10 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+
+  react-hook-form@7.56.4(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-is@18.3.1: {}
 

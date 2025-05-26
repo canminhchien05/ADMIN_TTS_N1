@@ -1,61 +1,59 @@
-// File: components/CreateCategory.tsx
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Select, message } from "antd";
+import { Form, Input, Button, Select, message, Card } from "antd";
 import axios from "axios";
-import type { Category } from "../../types/Category/category.type";
+import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../../utils/axios.util";
 
 const { Option } = Select;
 
 const CreateCategory = () => {
   const [form] = Form.useForm();
-  const [parentCategories, setParentCategories] = useState<Category[]>([]);
+  const [parentCategories, setParentCategories] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const fetchParents = async () => {
-    try {
-      const res = await axios.get("http://localhost:3000/api/categories");
-      const active = res.data.filter((cat: Category) => !cat.isDeleted);
-      setParentCategories(active);
-    } catch {
-      message.error("Không thể tải danh mục cha");
-    }
-  };
+  const navigate = useNavigate(); // chỉ dùng nếu bạn dùng react-router
 
   useEffect(() => {
-    fetchParents();
+    const fetchCategories = async () => {
+      try {
+        const res = await axiosInstance.get("/categories");
+        setParentCategories(res.data.filter((cat) => !cat.isDeleted));
+      } catch {
+        message.error("Lỗi khi tải danh mục cha");
+      }
+    };
+    fetchCategories();
   }, []);
 
-  const handleSubmit = async (values: Category) => {
-    setLoading(true);
+  const onFinish = async (values) => {
     try {
-      await axios.post("http://localhost:3000/api/category", values);
+      setLoading(true);
+      await axiosInstance.post("/categories", values);
       message.success("Tạo danh mục thành công");
-      form.resetFields();
+      navigate("/admin/categories"); // chuyển hướng về trang danh sách
     } catch {
-      message.error("Tạo danh mục thất bại");
+      message.error("Lỗi khi tạo danh mục");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto" }}>
-      <h2>Thêm danh mục</h2>
-      <Form form={form} layout="vertical" onFinish={handleSubmit}>
+    <Card title="Tạo danh mục mới" style={{ maxWidth: 600, margin: "auto" }}>
+      <Form layout="vertical" form={form} onFinish={onFinish}>
         <Form.Item
-          name="name"
           label="Tên danh mục"
+          name="name"
           rules={[{ required: true, message: "Vui lòng nhập tên danh mục" }]}
         >
           <Input />
         </Form.Item>
 
-        <Form.Item name="description" label="Mô tả">
+        <Form.Item label="Mô tả" name="description">
           <Input.TextArea rows={3} />
         </Form.Item>
 
-        <Form.Item name="parentId" label="Danh mục cha">
-          <Select allowClear placeholder="-- Không có danh mục cha --">
+        <Form.Item label="Danh mục cha" name="parentId">
+          <Select allowClear placeholder="Không có (danh mục gốc)">
             {parentCategories.map((cat) => (
               <Option key={cat._id} value={cat._id}>
                 {cat.name}
@@ -70,7 +68,7 @@ const CreateCategory = () => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </Card>
   );
 };
 

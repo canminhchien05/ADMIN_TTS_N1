@@ -1,17 +1,15 @@
-import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import './App.css';
 import { router } from './routes';
+import './App.css';
+import TanstackProvider from './providers/TanstackProvider';
 
 function App() {
 
-  useEffect(() => {
-
-  }, [])
-
   return (
     <>
-      <RouterProvider router={router} />
+      <TanstackProvider>
+        <RouterProvider router={router} />
+      </TanstackProvider>
     </>
   )
 }
