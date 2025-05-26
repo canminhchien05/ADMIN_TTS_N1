@@ -5,7 +5,7 @@ import CategoriesPage from "../pages/Categories/Categories";
 import BrandsPage from "../pages/Brands/Brands";
 import UsersPage from "../pages/Users/Users";
 import BlogsPage from "../pages/Blog/Blog";
-import VouchersPage from "../pages/Vouchers/Vouches";
+import VouchersPage from "../pages/Vouchers/Vouchers";
 import VariantsPage from "../pages/Variants/Variants";
 import AddBlogPage from "../pages/Blog/BlogAdd";
 import UpdateBlogPage from "../pages/Blog/BlogUpdate";

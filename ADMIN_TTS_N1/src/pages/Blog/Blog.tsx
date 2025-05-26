@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import type { IBlog } from '../../types/blog.types';
 
 const BlogsPage = () => {
@@ -84,6 +84,14 @@ const BlogsPage = () => {
                   >
                     Xoá
                   </button>
+                  
+                  <button
+                    onClick={() => handleDelete(blog._id)}
+                    className="bg-green-500 px-3 py-1 rounded"
+                  >
+                    <Link className='text-white' to={`admin/blogs/update/${blog._id}`}>Sửa</Link>
+                  </button>
+                  
                 </td>
               </tr>
             ))}

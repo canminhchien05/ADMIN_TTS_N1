@@ -1,4 +1,4 @@
-import { ContainerOutlined, DashboardFilled, FileTextFilled, HighlightFilled, ProductFilled } from '@ant-design/icons';
+import { BarsOutlined, ContainerOutlined, DashboardFilled, FileTextFilled, HighlightFilled, ProductFilled } from '@ant-design/icons';
 import { Menu, type MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const Sidebar = () => {
     {
       key: 'categories',
       label: 'Quản lý danh mục',
-      icon: <HighlightFilled />,
+      icon: <BarsOutlined />,
       children: [
         { key: 'categories', label: 'Danh sách danh mục' },
         { key: 'categoryadd', label: 'Thêm danh mục' },
@@ -91,41 +91,41 @@ const Sidebar = () => {
         case "variants":
           navigate("/admin/variants")
           break;
-          case "variantadd":
+        case "variantadd":
           navigate("/admin/variant-add")
           break;
-          case "categories":
+        case "categories":
           navigate("/admin/categories")
           break;
-          case "categoryadd":
+        case "categoryadd":
           navigate("/admin/category-add")
           break;
-          case "brands":
+        case "brands":
           navigate("/admin/brands")
           break;
-          case "brandadd":
+        case "brandadd":
           navigate("/admin/brand-add")
           break;
-          case "blogs":
+        case "blogs":
           navigate("/admin/blogs")
           break;
-          case "blogadd":
+        case "blogadd":
           navigate("/admin/blogs/add")
           break;
-          case "vouchers":
+        case "vouchers":
           navigate("/admin/vouchers")
           break;
-          case "voucheradd":
+        case "voucheradd":
           navigate("/admin/voucher-add")
           break;
-          case "users":
+        case "users":
           navigate("/admin/users")
           break;
-          case "useradd":
+        case "useradd":
           navigate("/admin/user-add")
           break;
         default:
-           navigate("/dashboard") 
+           navigate("/admin")
            break;
       }
   };

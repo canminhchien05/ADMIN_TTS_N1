@@ -1,14 +1,14 @@
 import axios, {
   AxiosError,
-  type AxiosRequestConfig,
+  // type AxiosRequestConfig,
   type AxiosResponse,
 } from "axios";
 // import { NEXT_PUBLIC_API_URL, NEXT_PUBLIC_AUTH_API_URL } from "./env";
 // import { clearUserInfoAndToken, getCommonStateFromLocalStorage } from "./utils";
 
-interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  isAuthApi?: boolean;
-}
+// interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+//   isAuthApi?: boolean;
+// }
 
 const axiosInstance = axios.create({
   baseURL: process.env.PUBLIC_API_URL,
